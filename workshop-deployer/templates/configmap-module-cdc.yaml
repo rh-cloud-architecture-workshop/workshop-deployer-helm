@@ -1,0 +1,51 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: module-cdc
+data:
+  module-cdc.json: |
+    {
+      "apiVersion": "argoproj.io/v1alpha1",
+      "kind": "Application",
+      "metadata": {
+        "name": "{{ .Values.module.module_cdc.name }}",
+        "namespace": "{{ .Values.module.module_cdc.namespace }}",
+        "finalizers": [
+          "resources-finalizer.argocd.argoproj.io/foreground"
+        ]
+      },
+      "spec": {
+        "ignoreDifferences": [
+          {
+            "group": "kafka.strimzi.io",
+            "kind": "KafkaConnect",
+            "jsonPointers": [
+              "/spec/bootstrapServers",
+              "/spec/authentication",
+              "/spec/tls",
+              "/spec/replicas"
+            ]
+          }
+        ],
+        "destination": {
+          "name": "",
+          "namespace": "{{ .Values.module.module_cdc.destination.namespace }}",
+          "server": "https://kubernetes.default.svc"
+        },
+        "project": "default",
+        "syncPolicy": {
+          "automated": {
+            "prune": false,
+            "selfHeal": false
+          }
+        },
+        "source": {
+          "repoURL": "{{ .Values.module.module_cdc.source.repoUrl }}",
+          "targetRevision": "{{ .Values.module.module_cdc.source.targetRevision }}",
+          "path": "{{ .Values.module.module_cdc.source.path }}",
+          "helm": {
+            "values": "\ndebezium:\n  deploy: false\ncashbackConnector:\n  deploy: false\nintegrationPlatform:\n  deploy: true\n\nkafka:\n  namespace: globex-mw-{{ .Values.variable.user }}\n\ncashback-db:\n  persistence:\n    mode: ephemeral\n"
+          }
+        }
+      }
+    }

@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "workshop-deployer.name" . }}
+  labels:
+    {{- include "workshop-deployer.labels" . | nindent 4 }}
+  annotations:
+    service.alpha.openshift.io/serving-cert-secret-name: {{ include "workshop-deployer.name" . }}-tls
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - name: proxy
+      port: 8888
+      protocol: TCP
+      targetPort: oauth-proxy
+  selector:
+    {{- include "workshop-deployer.selectorLabels" . | nindent 4 }}

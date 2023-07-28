@@ -1,0 +1,46 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: workshop-modules
+data:
+  modules.json: |
+    {
+      "modules": [
+        {
+          "name": "Launch new channels using Contract-First approach",
+          "description": "In this module you discover how Contract First Approach provides the right framework to acclerate launching new channels in a secure way.",
+          "tags": {
+            "primary": [
+              "#API-Management",
+              "#Keycloak",
+              "#OIDC",
+              "#Apicurio",
+              "#Service-Registry",
+              "#3scale",
+              "#DevSpaces"              
+            ],
+            "secondary": [
+              "#hands-on"
+            ]
+          },
+          "configMap": "module-apim"
+        },
+        {
+          "name": "Build new functionality with Change Data Capture",
+          "description": "In this module you discover how you can leverage Change Data Capture to build out new functionality with minimal impact on existing applications.",
+          "tags": {
+            "primary": [
+              "#CDC",
+              "#Kafka",
+              "#Debezium",
+              "#Camel-K",
+              "#DevSpaces"
+            ],
+            "secondary": [
+              "#hands-on"
+            ]
+          },
+          "configMap": "module-cdc"
+        }
+      ]
+    }

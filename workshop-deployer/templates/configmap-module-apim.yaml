@@ -1,0 +1,39 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: module-apim
+data:
+  module-apim.json: |
+    {
+      "apiVersion": "argoproj.io/v1alpha1",
+      "kind": "Application",
+      "metadata": {
+        "name": "{{ .Values.module.module_apim.name }}",
+        "namespace": "{{ .Values.module.module_apim.namespace }}",
+        "finalizers": [
+          "resources-finalizer.argocd.argoproj.io/foreground"
+        ]
+      },
+      "spec": {
+        "destination": {
+          "name": "",
+          "namespace": "{{ .Values.module.module_apim.destination.namespace }}",
+          "server": "https://kubernetes.default.svc"
+        },
+        "project": "default",
+        "syncPolicy": {
+          "automated": {
+            "prune": false,
+            "selfHeal": false
+          }
+        },
+        "source": {
+          "repoURL": "{{ .Values.module.module_apim.source.repoUrl }}",
+          "targetRevision": "{{ .Values.module.module_apim.source.targetRevision }}",
+          "path": "{{ .Values.module.module_apim.source.path }}",
+          "helm": {
+            "values": "globex-partner-gateway:\n  globexStoreApp:\n    url: http://globex-store-app.globex-{{ .Values.variable.user }}.svc.cluster.local:8080\nglobex-mobile-gateway:\n  globexStoreApp:\n    url: http://globex-store-app.globex-{{ .Values.variable.user }}.svc.cluster.local:8080\n  keycloak:\n    authserver: https://sso.{{ .Values.openshift.domain }}/auth/realms/globex-{{ .Values.variable.user }}\n"
+          }
+        }
+      }
+    }

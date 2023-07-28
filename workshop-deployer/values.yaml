@@ -1,0 +1,122 @@
+nameOverride: ""
+fullnameOverride: ""
+
+replicaCount: 1
+
+image:
+  repository: quay.io/cloud-architecture-workshop/workshop-deployer
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+imagePullSecrets: []
+
+serviceAccount:
+  create: true
+  annotations:
+    serviceaccounts.openshift.io/oauth-redirectreference.workshop-deployer: >-
+      {"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"workshop-deployer"}}  
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: 
+  runAsNonRoot: true
+  seccompProfile:
+    type: RuntimeDefault
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+
+resources:
+  limits:
+    cpu: 250m
+    memory: 250Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+readinessProbe:
+  httpGet:
+    path: /q/health/ready
+    port: http
+    scheme: HTTP
+  initialDelaySeconds: 5
+  timeoutSeconds: 3
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+livenessProbe:
+  httpGet:
+    path: /q/health/live
+    port: http
+    scheme: HTTP
+  initialDelaySeconds: 30
+  timeoutSeconds: 3
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+route:
+  enabled: true
+  host:
+  tlsEnabled: true
+  tls:
+    termination: reencrypt
+    insecureEdgeTerminationPolicy: Redirect
+
+service:
+  type: ClusterIP
+
+module:
+  module_cdc:
+    name: globex-cdc
+    namespace: globex-gitops-{{ __user }}
+    destination: 
+      namespace: globex-cdc-{{ __user }}
+    source:
+      repoUrl: https://github.com/rh-cloud-architecture-workshop/helm.git
+      targetRevision: main
+      path: globex-cdc
+  module_apim:
+    name: globex-apim
+    namespace: globex-gitops-{{ __user }}
+    destination: 
+      namespace: globex-apim-{{ __user }}
+    source:
+      repoUrl: https://github.com/rh-cloud-architecture-workshop/helm.git
+      targetRevision: main
+      path: globex-apim
+
+rolebinding:
+  namespace_prefix: globex-gitops-user
+
+user:
+  count:
+    
+variable:
+  user: "{{ __user }}"
+
+openshift:
+  domain:
+
+oauthProxy:
+  image:
+    repository: quay.io/openshift/origin-oauth-proxy
+    pullPolicy: IfNotPresent
+    tag: "4.13"
