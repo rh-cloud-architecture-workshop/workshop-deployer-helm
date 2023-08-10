@@ -42,6 +42,8 @@ spec:
               value: {{ .Values.bookbag.namespace}}
             - name: ALLOWED_MODULES_COUNT
               value: {{ quote .Values.modules.maxCount }}
+            - name: OPENSHIFT_DOMAIN
+              value: {{ quote .Values.openshift.domain }}
           ports:
             - name: http
               containerPort: 8080
