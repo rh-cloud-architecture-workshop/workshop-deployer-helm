@@ -14,12 +14,12 @@ serviceAccount:
   create: true
   annotations:
     serviceaccounts.openshift.io/oauth-redirectreference.workshop-deployer: >-
-      {"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"workshop-deployer"}}  
+      {"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"workshop-deployer"}}
   name: ""
 
 podAnnotations: {}
 
-podSecurityContext: 
+podSecurityContext:
   runAsNonRoot: true
   seccompProfile:
     type: RuntimeDefault
@@ -38,6 +38,10 @@ resources:
     cpu: 100m
     memory: 128Mi
 
+bookbag:
+  namespace:
+modules:
+  maxCount:
 readinessProbe:
   httpGet:
     path: /q/health/ready
@@ -87,7 +91,7 @@ module:
   module_cdc:
     name: globex-cdc
     namespace: globex-gitops-{{ __user }}
-    destination: 
+    destination:
       namespace: globex-cdc-{{ __user }}
     source:
       repoUrl: https://github.com/rh-cloud-architecture-workshop/helm.git
@@ -96,7 +100,7 @@ module:
   module_apim:
     name: globex-apim
     namespace: globex-gitops-{{ __user }}
-    destination: 
+    destination:
       namespace: globex-apim-{{ __user }}
     source:
       repoUrl: https://github.com/rh-cloud-architecture-workshop/helm.git
@@ -108,7 +112,7 @@ rolebinding:
 
 user:
   count:
-    
+
 variable:
   user: "{{ __user }}"
 
