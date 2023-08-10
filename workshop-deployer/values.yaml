@@ -39,7 +39,7 @@ resources:
     memory: 128Mi
 
 bookbag:
-  namespace: bookbag
+  namespace:
 modules:
   maxCount:
 readinessProbe:
