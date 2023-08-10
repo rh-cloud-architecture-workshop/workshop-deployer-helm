@@ -41,7 +41,7 @@ resources:
 bookbag:
   namespace: bookbag
 modules:
-  maxCount:
+  maxCount: 2
 readinessProbe:
   httpGet:
     path: /q/health/ready
@@ -106,11 +106,6 @@ module:
       repoUrl: https://github.com/rh-cloud-architecture-workshop/helm.git
       targetRevision: main
       path: globex-apim
-  workshop-deployer:
-    bookbag:
-      namespace: bookbag
-    modules:
-      maxCount:
 
 rolebinding:
   namespace_prefix: globex-gitops-user
