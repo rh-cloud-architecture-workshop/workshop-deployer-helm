@@ -41,7 +41,7 @@ resources:
 bookbag:
   namespace: bookbag
 modules:
-  maxCount: 2
+  maxCount: "2"
 readinessProbe:
   httpGet:
     path: /q/health/ready
