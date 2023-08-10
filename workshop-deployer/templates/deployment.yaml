@@ -38,8 +38,8 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-            - name: BOOKBAG_URL_ROOT
-              value: https://{{ .Value.bookbag.namespace}}.{{ .Values.openshift.domain }}
+            - name: BOOKBAG_NAMESPACE
+              value: {{ .Value.bookbag.namespace}}
             - name: ALLOWED_MODULES_COUNT
               value: {{ .Values.modules.count }}
           ports:
