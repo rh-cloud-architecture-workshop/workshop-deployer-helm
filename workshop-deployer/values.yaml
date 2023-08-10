@@ -39,9 +39,9 @@ resources:
     memory: 128Mi
 
 bookbag:
-  namespace: bookbag
+  namespace:
 modules:
-  maxCount: "2"
+  maxCount:
 readinessProbe:
   httpGet:
     path: /q/health/ready
