@@ -39,9 +39,9 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
             - name: BOOKBAG_NAMESPACE
-              value: {{ .Value.bookbag.namespace}}
+              value: bookbag
             - name: ALLOWED_MODULES_COUNT
-              value: {{ .Values.modules.count }}
+              value: 2
           ports:
             - name: http
               containerPort: 8080
