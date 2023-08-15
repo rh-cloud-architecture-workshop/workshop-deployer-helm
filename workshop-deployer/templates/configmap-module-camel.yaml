@@ -9,7 +9,10 @@ data:
       "kind": "Application",
       "metadata": {
         "name": "{{ .Values.module.module_camel.name }}",
-        "namespace": "{{ .Values.module.module_camel.namespace }}"
+        "namespace": "{{ .Values.module.module_camel.namespace }}",
+        "finalizers": [
+          "resources-finalizer.argocd.argoproj.io/foreground"
+        ]
       },
       "spec": {
         "destination": {
