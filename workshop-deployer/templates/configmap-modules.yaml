@@ -41,6 +41,25 @@ data:
             ]
           },
           "configMap": "module-cdc"
+        },
+        {
+          "name": "Build a multi-channel support service for Globex customers",
+          "description": "In this module you will use Apache Camel to implement a pluggable multichannel support service, integrating several instant messaging solutions.",
+          "tags": {
+            "primary": [
+              "#Camel-K",
+              "#AMQ-Broker",
+              "#AMQ-Streams",
+              "#Kafka",
+              "#Infinispan",
+              "#OpenShift Data Foundation",
+              "#DevSpaces"
+            ],
+            "secondary": [
+              "#hands-on"
+            ]
+          },
+          "configMap": "module-camel"
         }
       ]
     }

@@ -106,6 +106,15 @@ module:
       repoUrl: https://github.com/rh-cloud-architecture-workshop/helm.git
       targetRevision: main
       path: globex-apim
+  module_camel:
+    name: globex-camel
+    namespace: globex-gitops-{{ __user }}
+    destination:
+      namespace: globex-camel-{{ __user }}
+    source:
+      repoUrl: https://github.com/btison/cloud-architecture-workshop-helm.git
+      targetRevision: camel
+      path: globex-camel
 
 rolebinding:
   namespace_prefix: globex-gitops-user
