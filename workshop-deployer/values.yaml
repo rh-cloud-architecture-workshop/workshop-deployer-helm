@@ -115,6 +115,15 @@ module:
       repoUrl: https://github.com/btison/cloud-architecture-workshop-helm.git
       targetRevision: camel
       path: globex-camel
+  module_skupper:
+    name: globex-skupper
+    namespace: globex-gitops-{{ __user }}
+    destination:
+      namespace: globex-skupper-{{ __user }}
+    source:
+      repoUrl: https://github.com/btison/cloud-architecture-workshop-helm.git
+      targetRevision: skupper
+      path: globex-skupper
 
 rolebinding:
   namespace_prefix: globex-gitops-user

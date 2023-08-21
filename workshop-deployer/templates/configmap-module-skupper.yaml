@@ -1,0 +1,39 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: module-skupper
+data:
+  module-skupper.json: |
+    {
+      "apiVersion": "argoproj.io/v1alpha1",
+      "kind": "Application",
+      "metadata": {
+        "name": "{{ .Values.module.module_skupper.name }}",
+        "namespace": "{{ .Values.module.module_skupper.namespace }}",
+        "finalizers": [
+          "resources-finalizer.argocd.argoproj.io/foreground"
+        ]
+      },
+      "spec": {
+        "destination": {
+          "name": "",
+          "namespace": "{{ .Values.module.module_skupper.destination.namespace }}",
+          "server": "https://kubernetes.default.svc"
+        },
+        "project": "default",
+        "syncPolicy": {
+          "automated": {
+            "prune": false,
+            "selfHeal": false
+          }
+        },
+        "source": {
+          "repoURL": "{{ .Values.module.module_skupper.source.repoUrl }}",
+          "targetRevision": "{{ .Values.module.module_skupper.source.targetRevision }}",
+          "path": "{{ .Values.module.module_skupper.source.path }}",
+          "helm": {
+            "values": "globex-db-secret:\n  pgsql:\n    adminPassword: adminpassword\nglobex-db:\n  pgsql:\n    adminPassword: adminpassword\n  service:\n    enabled: false\n  namespace: globex-skupper-db-{{ .Values.variable.user }}\nnetworkpolicy:\n  enabled: true\n  namespace: globex-skupper-db-{{ .Values.variable.user }}\n"
+          }
+        }
+      }
+    }

@@ -60,6 +60,21 @@ data:
             ]
           },
           "configMap": "module-camel"
+        },
+        {
+          "name": "Build a service network to connect disparate services",
+          "description": "In this module you discover how to build a servie network to connect disparate services using a secured layer 7 service network.",
+          "tags": {
+            "primary": [
+              "#Skupper",
+              "#Service Interconnect",
+              "#Application Connectivity"
+            ],
+            "secondary": [
+              "#hands-on"
+            ]
+          },
+          "configMap": "module-skupper"
         }
       ]
     }
