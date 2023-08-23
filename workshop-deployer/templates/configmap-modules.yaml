@@ -24,7 +24,7 @@ data:
             ]
           },
           "configMap": "module-apim",
-          "namespaces": ["globex-apim-{{ __user }}"]
+          "namespaces": ["globex-apim-{{`{{ __user }}`}}"]
         },
         {
           "name": "Build new functionality with Change Data Capture",
@@ -42,7 +42,7 @@ data:
             ]
           },
           "configMap": "module-cdc",
-          "namespaces": ["globex-cdc-{{ __user }}"]          
+          "namespaces": ["globex-cdc-{{`{{ __user }}`}}"]          
         },
         {
           "name": "Build a multi-channel support service for Globex customers",
@@ -62,7 +62,7 @@ data:
             ]
           },
           "configMap": "module-camel",
-          "namespaces": ["globex-camel-{{ __user }}"]
+          "namespaces": ["globex-camel-{{`{{ __user }}`}}"]
         },
         {
           "name": "Build a service network to connect disparate services",
@@ -78,7 +78,7 @@ data:
             ]
           },
           "configMap": "module-skupper",
-          "namespaces": ["globex-skupper-{{ __user }}", "globex-skupper-db-{{ __user }}"]
+          "namespaces": ["globex-skupper-{{`{{ __user }}`}}", "globex-skupper-db-{{`{{ __user }}`}}"]
         }
       ]
     }
