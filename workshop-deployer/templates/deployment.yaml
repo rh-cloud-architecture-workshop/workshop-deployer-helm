@@ -44,6 +44,10 @@ spec:
               value: {{ quote .Values.modules.maxCount }}
             - name: OPENSHIFT_DOMAIN
               value: {{ quote .Values.openshift.domain }}
+            - name: ARGO_NAMESPACE_PREFIX
+              value: {{ .Values.argo.namespace.prefix }}
+            - name: ARGO_NAME_PREFIX
+              value: {{ .Values.argo.name.prefix }}
           ports:
             - name: http
               containerPort: 8080

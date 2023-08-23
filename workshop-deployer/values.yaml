@@ -137,6 +137,12 @@ variable:
 openshift:
   domain:
 
+argo:
+  namespace:
+    prefix: globex-gitops
+  name:
+    prefix: globex-gitops
+
 oauthProxy:
   image:
     repository: quay.io/openshift/origin-oauth-proxy
