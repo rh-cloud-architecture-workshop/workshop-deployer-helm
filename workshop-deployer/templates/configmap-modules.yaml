@@ -66,7 +66,7 @@ data:
         },
         {
           "name": "Build a service network to connect disparate services",
-          "description": "In this module you discover how to build a servie network to connect disparate services using a secured layer 7 service network.",
+          "description": "In this module you discover how to build a service network to connect disparate services using a secured layer 7 service network.",
           "tags": {
             "primary": [
               "#Skupper",
