@@ -124,6 +124,15 @@ module:
       repoUrl: https://github.com/btison/cloud-architecture-workshop-helm.git
       targetRevision: skupper
       path: globex-skupper
+  module_serverless:
+    name: globex-serverless
+    namespace: globex-gitops-{{ __user }}
+    destination:
+      namespace: globex-serverless-{{ __user }}
+    source:
+      repoUrl: https://github.com/btison/globex-sentiment-analysis-helm.git
+      targetRevision: cloud-architecture-workshop
+      path: globex-sentiment-analysis/sentiment-analysis
 
 rolebinding:
   namespace_prefix: globex-gitops-user

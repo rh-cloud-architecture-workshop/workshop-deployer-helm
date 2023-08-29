@@ -79,6 +79,23 @@ data:
           },
           "configMap": "module-skupper",
           "namespaces": ["globex-skupper-{{`{{ __user }}`}}", "globex-skupper-db-{{`{{ __user }}`}}"]
+        },
+        {
+          "name": "Event driven applications with Serverless Knative Eventing",
+          "description": "In this module you learn how to leverage Knative Eventing to build an event driven application, without having to deal with the underlying messaging infrastructure.",
+          "tags": {
+            "primary": [
+              "#Knative Eventing",
+              "#AMQ-Streams",
+              "#Kafka",
+              "#Event Driven Applications"
+            ],
+            "secondary": [
+              "#hands-on"
+            ]
+          },
+          "configMap": "module-serverless",
+          "namespaces": ["globex-serverless-{{`{{ __user }}`}}"]
         }
       ]
     }

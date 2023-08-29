@@ -1,0 +1,39 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: module-serverless
+data:
+  module-serverless.json: |
+    {
+      "apiVersion": "argoproj.io/v1alpha1",
+      "kind": "Application",
+      "metadata": {
+        "name": "{{ .Values.module.module_serverless.name }}",
+        "namespace": "{{ .Values.module.module_serverless.namespace }}",
+        "finalizers": [
+          "resources-finalizer.argocd.argoproj.io/foreground"
+        ]
+      },
+      "spec": {
+        "destination": {
+          "name": "",
+          "namespace": "{{ .Values.module.module_serverless.destination.namespace }}",
+          "server": "https://kubernetes.default.svc"
+        },
+        "project": "default",
+        "syncPolicy": {
+          "automated": {
+            "prune": false,
+            "selfHeal": false
+          }
+        },
+        "source": {
+          "repoURL": "{{ .Values.module.module_serverless.source.repoUrl }}",
+          "targetRevision": "{{ .Values.module.module_serverless.source.targetRevision }}",
+          "path": "{{ .Values.module.module_serverless.source.path }}",
+          "helm": {
+            "values": "kafka:\n  namespace: &namespace globex-mw-{{ .Values.variable.user }}\n  bootstrapServer: &bootstrapServer kafka-kafka-bootstrap.globex-mw-{{ .Values.variable.user }}.svc.cluster.local:9092\n\nkafka-topics:\n  kafka:\n    namespace: *namespace\n    cluster: kafka\n\nkafka-secret:\n  kafka:\n    namespace: *namespace\n\nknative-kafkasink:\n  kafka:\n    bootstrapServer: *bootstrapServer\n\nknative-kafkasource:\n  kafka:\n    bootstrapServer: *bootstrapServer\n\nproduct-reviews:\n  kafkaSink:\n    reviews: http://kafka-sink-ingress.knative-eventing.svc.cluster.local/{{ .Values.module.module_serverless.destination.namespace }}/reviews-sink\n\naiml-moderate-reviews:\n  kafkaSink:\n    moderated: http://kafka-sink-ingress.knative-eventing.svc.cluster.local/{{ .Values.module.module_serverless.destination.namespace }}/moderated-reviews-sink\n    denied: http://kafka-sink-ingress.knative-eventing.svc.cluster.local/{{ .Values.module.module_serverless.destination.namespace }}/denied-reviews-sink\n  \n  gunicorn:\n    threads: \"4\"\n    timeout: \"180\"\n\naiml-sentiment-reviews:\n  kafkaSink:\n    sentiment: http://kafka-sink-ingress.knative-eventing.svc.cluster.local/{{ .Values.module.module_serverless.destination.namespace }}/reviews-sentiment-sink\n  \n  gunicorn:\n    threads: \"4\"\n    timeout: \"180\"\n\nglobex-web-reviews:\n  globexStoreApp:\n    url: http://globex-store-app.globex-{{ .Values.variable.user }}.svc.cluster.local:8080\n  activityTrackingService:\n    url: http://activity-tracking.globex-{{ .Values.variable.user }}.svc.cluster.local:8080\n    service: activity-tracking\n    path: /track\n  recommendationEngine:\n    url: http://recommendation-engine.globex-{{ .Values.variable.user }}.svc.cluster.local:8080\n    service: recommendation-engine\n    path: /score/product\n\n  productReviews:\n    url: http://product-reviews.{{ .Values.module.module_serverless.destination.namespace }}.svc.cluster.local:8080\n    submitReviewPath: /review/submit\n    fetchReviewPath: /review/list\n\n  sso:\n    url: \"https://sso.{{ .Values.openshift.domain }}/auth/realms/globex-{{ .Values.variable.user }}\"\n    client: globex-web-gateway\n    logoutUri: https://globex-web-{{ .Values.module.module_serverless.destination.namespace }}.{{ .Values.openshift.domain }}/home\n"
+          }
+        }
+      }
+    }
