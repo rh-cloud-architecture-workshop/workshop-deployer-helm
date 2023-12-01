@@ -32,7 +32,7 @@ data:
           "targetRevision": "{{ .Values.module.module_skupper.source.targetRevision }}",
           "path": "{{ .Values.module.module_skupper.source.path }}",
           "helm": {
-            "values": "globex-db-secret:\n  pgsql:\n    adminPassword: adminpassword\nglobex-db:\n  pgsql:\n    adminPassword: adminpassword\n  service:\n    enabled: false\n  namespace: globex-skupper-db-{{ .Values.variable.user }}\nnetworkpolicy:\n  enabled: true\n  namespace: globex-skupper-db-{{ .Values.variable.user }}\n"
+            "values": "globex-db-secret:\n  pgsql:\n    adminPassword: adminpassword\nglobex-db:\n  pgsql:\n    adminPassword: adminpassword\n  service:\n    enabled: false\n  namespace: globex-skupper-db-{{ .Values.variable.user }}\nnetworkpolicy:\n  enabled: true\n  namespace: globex-skupper-db-{{ .Values.variable.user }}\nglobex-web:\n  sso:\n    url: \"https://sso.{{ .Values.openshift.domain }}/realms/globex-{{ .Values.variable.user }}\"\n    client: globex-web-gateway\n    logoutUri: https://globex-web-{{ .Values.module.module_skupper.destination.namespace }}.{{ .Values.openshift.domain }}/home\n"
           }
         }
       }
