@@ -7,26 +7,6 @@ data:
     {
       "modules": [
         {
-          "name": "Launch new channels using Contract-First approach",
-          "description": "In this module you discover how Contract First Approach provides the right framework to acclerate launching new channels in a secure way.",
-          "tags": {
-            "primary": [
-              "#API-Management",
-              "#Keycloak",
-              "#OIDC",
-              "#Apicurio",
-              "#Service-Registry",
-              "#3scale",
-              "#DevSpaces"              
-            ],
-            "secondary": [
-              "#hands-on"
-            ]
-          },
-          "configMap": "module-apim",
-          "namespaces": ["globex-apim-{{`{{ __user }}`}}"]
-        },
-        {
           "name": "Build new functionality with Change Data Capture",
           "description": "In this module you discover how you can leverage Change Data Capture to build out new functionality with minimal impact on existing applications.",
           "tags": {
@@ -43,59 +23,6 @@ data:
           },
           "configMap": "module-cdc",
           "namespaces": ["globex-cdc-{{`{{ __user }}`}}"]          
-        },
-        {
-          "name": "Build a multi-channel support service for Globex customers",
-          "description": "In this module you will use Apache Camel to implement a pluggable multichannel support service, integrating several instant messaging solutions.",
-          "tags": {
-            "primary": [
-              "#Camel-K",
-              "#AMQ-Broker",
-              "#AMQ-Streams",
-              "#Kafka",
-              "#Infinispan",
-              "#OpenShift Data Foundation",
-              "#DevSpaces"
-            ],
-            "secondary": [
-              "#hands-on"
-            ]
-          },
-          "configMap": "module-camel",
-          "namespaces": ["globex-camel-{{`{{ __user }}`}}"]
-        },
-        {
-          "name": "Build a service network to connect disparate services",
-          "description": "In this module you discover how to build a service network to connect disparate services using a secured layer 7 service network.",
-          "tags": {
-            "primary": [
-              "#Skupper",
-              "#Service Interconnect",
-              "#Application Connectivity"
-            ],
-            "secondary": [
-              "#hands-on"
-            ]
-          },
-          "configMap": "module-skupper",
-          "namespaces": ["globex-skupper-{{`{{ __user }}`}}", "globex-skupper-db-{{`{{ __user }}`}}"]
-        },
-        {
-          "name": "Event driven applications with Serverless Knative Eventing",
-          "description": "In this module you learn how to leverage Knative Eventing to build an event driven application, without having to deal with the underlying messaging infrastructure.",
-          "tags": {
-            "primary": [
-              "#Knative Eventing",
-              "#AMQ-Streams",
-              "#Kafka",
-              "#Event Driven Applications"
-            ],
-            "secondary": [
-              "#hands-on"
-            ]
-          },
-          "configMap": "module-serverless",
-          "namespaces": ["globex-serverless-{{`{{ __user }}`}}"]
         }
       ]
     }
