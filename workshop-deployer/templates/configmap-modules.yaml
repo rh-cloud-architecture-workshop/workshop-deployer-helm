@@ -6,6 +6,24 @@ data:
   modules.json: |
     {
       "modules": [
+         {
+          "name": "Introduction to Cloud Architectures workshop",
+          "description": "This chapter explains the technical and functional environment for this workshop, with a walkthrough of the existing implementation. This module is deployed by default for you. Click on the Intro link to learn more about this workshop.",
+          "tags": {
+            "primary": [
+              "#AMQ-Streams",
+              "#Kafka",
+              "#Quarkus"
+            ],
+            "secondary": [
+              "#introduction",
+              "#overview"          
+            ]
+          },
+          "configMap": "module-globex",
+          "isDefault": true,
+          "namespaces": ["globex-{{ __user }}"]
+        },
         {
           "name": "Launch new channels using Contract-First approach",
           "description": "In this module you discover how Contract First Approach provides the right framework to acclerate launching new channels in a secure way.",
