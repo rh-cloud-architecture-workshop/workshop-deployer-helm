@@ -22,7 +22,7 @@ data:
           },
           "configMap": "module-globex",
           "isDefault": true,
-          "namespaces": ["globex-{{ __user }}"]
+          "namespaces": ["globex-{{`{{ __user }}`}}"]
         },
         {
           "name": "Launch new channels using Contract-First approach",
