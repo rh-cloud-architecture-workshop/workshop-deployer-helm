@@ -48,7 +48,7 @@ spec:
               value: {{ .Values.argo.namespace.prefix }}
             - name: ARGO_NAME_PREFIX
               value: {{ .Values.argo.name.prefix }}
-            - name: PASSWORD
+            - name: USER_PASSWORD
               value: openshift
           ports:
             - name: http
