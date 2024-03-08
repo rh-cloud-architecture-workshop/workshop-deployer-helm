@@ -91,6 +91,7 @@ service:
 module:
   module_globex:
     name: module-globex
+    applicationName: globex
     namespace: globex-gitops-{{ __user }}
     destination:
       namespace: globex-{{ __user }}
