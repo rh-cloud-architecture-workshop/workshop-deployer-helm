@@ -38,8 +38,9 @@ resources:
     cpu: 100m
     memory: 128Mi
 
-bookbag:
-  namespace:
+showroom:
+  hostPrefix:
+  path: /content/modules
 modules:
   maxCount:
 readinessProbe:
@@ -89,7 +90,7 @@ service:
 
 module:
   module_globex:
-    name: globex
+    name: module-globex
     namespace: globex-gitops-{{ __user }}
     destination:
       namespace: globex-{{ __user }}
@@ -98,7 +99,7 @@ module:
       targetRevision: main
       path: globex
   module_cdc:
-    name: globex-cdc
+    name: module-cdc
     namespace: globex-gitops-{{ __user }}
     destination:
       namespace: globex-cdc-{{ __user }}
@@ -107,7 +108,7 @@ module:
       targetRevision: main
       path: globex-cdc
   module_apim:
-    name: globex-apim
+    name: module-apim
     namespace: globex-gitops-{{ __user }}
     destination:
       namespace: globex-apim-{{ __user }}
@@ -116,7 +117,7 @@ module:
       targetRevision: main
       path: globex-apim
   module_camel:
-    name: globex-camel
+    name: module-camel
     namespace: globex-gitops-{{ __user }}
     destination:
       namespace: globex-camel-{{ __user }}
@@ -125,7 +126,7 @@ module:
       targetRevision: main
       path: globex-camel
   module_skupper:
-    name: globex-skupper
+    name: module-skupper
     namespace: globex-gitops-{{ __user }}
     destination:
       namespace: globex-skupper-{{ __user }}
@@ -134,7 +135,7 @@ module:
       targetRevision: main
       path: globex-skupper
   module_serverless:
-    name: globex-serverless
+    name: module-serverless
     namespace: globex-gitops-{{ __user }}
     destination:
       namespace: globex-serverless-{{ __user }}

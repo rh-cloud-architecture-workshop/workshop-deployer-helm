@@ -38,8 +38,10 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-            - name: BOOKBAG_NAMESPACE
-              value: {{ .Values.bookbag.namespace}}
+            - name: SHOWROOM_HOST_PREFIX
+              value: {{ .Values.showroom.hostPrefix}}
+            - name: SHOWROOM_PATH
+              value: {{ .Values.showroom.path}}
             - name: ALLOWED_MODULES_COUNT
               value: {{ quote .Values.modules.maxCount }}
             - name: OPENSHIFT_DOMAIN

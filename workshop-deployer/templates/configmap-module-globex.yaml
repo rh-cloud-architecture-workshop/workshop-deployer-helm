@@ -9,7 +9,7 @@ data:
         "apiVersion": "argoproj.io/v1alpha1",
         "kind": "Application",
         "metadata": {
-          "name": "globex",
+          "name": "{{ .Values.module.module_globex.name }}",
           "namespace": "{{ .Values.module.module_globex.namespace }}",
           "finalizers": [
             "resources-finalizer.argocd.argoproj.io/foreground"
