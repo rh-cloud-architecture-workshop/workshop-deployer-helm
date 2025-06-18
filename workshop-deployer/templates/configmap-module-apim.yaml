@@ -32,8 +32,37 @@ data:
           "targetRevision": "{{ .Values.module.module_apim.source.targetRevision }}",
           "path": "{{ .Values.module.module_apim.source.path }}",
           "helm": {
-            "values": "globex-partner-gateway:\n  globexStoreApp:\n    url: http://globex-store-app.globex-{{ .Values.variable.user }}.svc.cluster.local:8080\nglobex-mobile-gateway:\n  globexStoreApp:\n    url: http://globex-store-app.globex-{{ .Values.variable.user }}.svc.cluster.local:8080\n  keycloak:\n    authserver: https://sso.{{ .Values.openshift.domain }}/realms/globex-{{ .Values.variable.user }}\n\nservice-registry:\n  service-registry:\n    route:\n      host: service-registry-apim-{{ .Values.variable.user }}.{{ .Values.openshift.domain }}\n"
+            "valuesObject": {
+              "globex-partner-gateway": {
+                "globexStoreApp": {
+                  "url": "http://globex-store-app.globex-{{ .Values.variable.user }}.svc.cluster.local:8080"
+                }
+              },
+              "globex-mobile-gateway": {
+                "globexStoreApp": {
+                  "url": "http://globex-store-app.globex-{{ .Values.variable.user }}.svc.cluster.local:8080"
+                },
+                "keycloak": {
+                  "authserver": "https://sso.{{ .Values.openshift.domain }}/realms/globex-{{ .Values.variable.user }}"
+                }
+              },
+              "service-registry": {
+                "service-registry": {
+                  "app": {
+                    "route": {
+                      "host": "service-registry-app-{{ .Values.variable.user }}.{{ .Values.openshift.domain }}"
+                    }
+                  },
+                  "ui": {
+                    "route": {
+                      "host": "service-registry-ui-{{ .Values.variable.user }}.{{ .Values.openshift.domain }}"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     }
+
