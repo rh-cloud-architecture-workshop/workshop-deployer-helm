@@ -141,8 +141,8 @@ module:
     destination:
       namespace: globex-serverless-{{ __user }}
     source:
-      repoUrl: https://github.com/rh-cloud-architecture-workshop/globex-sentiment-analysis-helm.git
-      targetRevision: main
+      repoUrl: https://github.com/btison/globex-sentiment-analysis-helm.git
+      targetRevision: ocp18
       path: globex-sentiment-analysis/sentiment-analysis
 
 rolebinding:
