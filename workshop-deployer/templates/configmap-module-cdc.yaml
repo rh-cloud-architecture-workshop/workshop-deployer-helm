@@ -44,7 +44,25 @@ data:
           "targetRevision": "{{ .Values.module.module_cdc.source.targetRevision }}",
           "path": "{{ .Values.module.module_cdc.source.path }}",
           "helm": {
-            "values": "\ndebezium:\n  deploy: false\ncashbackConnector:\n  deploy: false\nintegrationPlatform:\n  deploy: true\n\nkafka:\n  namespace: globex-mw-{{ .Values.variable.user }}\n\ncashback-db:\n  persistence:\n    mode: ephemeral\n"
+            "valuesObject": {
+              "debezium": {
+                "deploy": false
+              },
+              "cashbackConnector": {
+                "deploy": false
+              },
+              "integrationPlatform": {
+                "deploy": true
+              },
+              "kafka": {
+                "namespace": "globex-mw-{{ .Values.variable.user }}"
+              },
+              "cashback-db": {
+                "persistence": {
+                  "mode": "ephemeral"
+                }
+              }
+            }
           }
         }
       }
